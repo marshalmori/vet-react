@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 
 import Error from "./Error";
 
-const Formulario = ({paciente, pacientes, setPacientes }) => {
+const Formulario = ({paciente, setPaciente, pacientes, setPacientes }) => {
   const [nombre, setNombre] = useState('');
   const [proprietario, setProprietario] = useState('');
   const [email, setEmail] = useState('');
@@ -46,10 +46,26 @@ const Formulario = ({paciente, pacientes, setPacientes }) => {
       email, 
       fecha, 
       sintomas,
-      id: generarId(),
+      
     }
 
-    setPacientes([...pacientes, objetoPaciente]);
+    //Significa que estamos editando o paciente.
+    if(paciente.id){
+      //Editando registro
+      objetoPaciente.id = paciente.id;
+
+      const pacientesActualizados = pacientes.map( 
+        pacienteState => pacienteState.id === paciente.id ? objetoPaciente : pacienteState
+      )
+
+      setPacientes(pacientesActualizados);
+      setPaciente({})
+
+    } else {
+      //Nuevo registro
+      objetoPaciente.id = generarId();
+      setPacientes([...pacientes, objetoPaciente]);
+    }
 
     // Reiniciar o formulário para ficar vazio (limpar)
     setNombre("");
@@ -147,7 +163,7 @@ const Formulario = ({paciente, pacientes, setPacientes }) => {
           <input
             type="submit"
             className="bg-indigo-600 w-full p-3 shadow-md text-white uppercase font-bold hover:bg-indigo-800 cursor-pointer transition-all"
-            value="Adicionar Paciente"
+            value={ paciente.id ? "Editar Paciente" : "Adicionar Paciente"}
           />
 
         </form>

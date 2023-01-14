@@ -16,6 +16,7 @@ const App = () => {
      <div className="mt-8 md:flex">
         <Formulario  
           paciente={paciente}
+          setPaciente={setPaciente}
           pacientes={pacientes}
           setPacientes={setPacientes}
         />
