@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 
 import Error from "./Error";
 
-const Formulario = ({ pacientes, setPacientes }) => {
+const Formulario = ({paciente, pacientes, setPacientes }) => {
   const [nombre, setNombre] = useState('');
   const [proprietario, setProprietario] = useState('');
   const [email, setEmail] = useState('');
@@ -10,6 +10,17 @@ const Formulario = ({ pacientes, setPacientes }) => {
   const [sintomas, setSintomas] = useState('');
 
   const [error, setError] = useState(false);
+
+  useEffect(() => {
+    if(Object.keys(paciente).length > 0){
+      const {nombre, proprietario, email, fecha, sintomas} = paciente;
+      setNombre(nombre);
+      setProprietario(proprietario);
+      setEmail(email);
+      setFecha(fecha);
+      setSintomas(sintomas);
+    }
+  }, [paciente]);
 
   const generarId = () => {
     const random = Math.random().toString(36).slice(2);
