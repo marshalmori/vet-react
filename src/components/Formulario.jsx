@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 
-const Formulario = () => {
+const Formulario = ({ pacientes, setPacientes }) => {
   const [nombre, setNombre] = useState('');
   const [proprietario, setProprietario] = useState('');
   const [email, setEmail] = useState('');
@@ -18,6 +18,25 @@ const Formulario = () => {
        return;
     }
     setError(false);
+
+    //Objeto do paciente 
+    const objetoPaciente = {
+      nombre, 
+      proprietario, 
+      email, 
+      fecha, 
+      sintomas
+    }
+
+    setPacientes([...pacientes, objetoPaciente]);
+
+    // Reiniciar o formulário para ficar vazio (limpar)
+    setNombre("");
+    setProprietario("");
+    setEmail("");
+    setFecha("");
+    setSintomas("");
+
 
   }
 
