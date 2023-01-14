@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import Paciente from "./Paciente";
 
-const ListadoPacientes = ({pacientes}) => {
+const ListadoPacientes = ({pacientes, setPaciente}) => {
   return (
     <div className="md:w-1/2 lg:w-3/5 md:h-screen overflow-y-scroll">
 
@@ -12,7 +12,13 @@ const ListadoPacientes = ({pacientes}) => {
               Pacientes e Consultas
             </span>
           </h2>
-          {pacientes.map(paciente => (<Paciente key={paciente.id}  paciente={paciente} />))}
+          {pacientes.map(paciente => (
+            <Paciente 
+            key={paciente.id}  
+            paciente={paciente} 
+            setPaciente={setPaciente}
+            />
+          ))}
         </Fragment>
       ) : (
         <Fragment>
