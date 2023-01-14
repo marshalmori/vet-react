@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import Formulario from "./components/Formulario";
 import ListadoPacientes from "./components/ListadoPacientes";
@@ -12,6 +12,11 @@ const App = () => {
     
     setPacientes(pacientesActualizados);
   }
+
+  //useEffect - Tem mudança em pacientes? Então executa o código dentro de useEffect
+  useEffect(() => {
+    localStorage.setItem('pacientes', JSON.stringify(pacientes))
+  }, [pacientes])
 
 
 
