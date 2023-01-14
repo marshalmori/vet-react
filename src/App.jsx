@@ -5,10 +5,10 @@ import ListadoPacientes from "./components/ListadoPacientes";
 const App = () => {
 
   return (
-    <div className="container mx-auto mt-20">
+    <div className="container mx-auto mt-5">
      <Header/>
-     
-     <div className="mt-12 md:flex">
+
+     <div className="mt-8 md:flex">
         <Formulario/>
         <ListadoPacientes/>
      </div>
