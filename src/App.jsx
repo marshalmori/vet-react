@@ -5,18 +5,29 @@ import ListadoPacientes from "./components/ListadoPacientes";
 
 const App = () => {
   const [pacientes, setPacientes] = useState([]);
+  // const [pacientes, setPacientes] = useState(() => JSON.parse(localStorage.getItem('pacientes')) || []);
   const [paciente, setPaciente] = useState({});
+
+  useEffect(() => {
+    const obtenerLS = () => {
+      const pacientesLS = JSON.parse(localStorage.getItem('pacientes')) ?? [];
+      setPacientes(pacientesLS)
+    }
+
+    obtenerLS();
+  }, [])
+
+  //useEffect - Tem mudança em pacientes? Então executa o código dentro de useEffect
+  useEffect(() => {
+    localStorage.setItem('pacientes', JSON.stringify(pacientes));
+  }, [pacientes])
+
 
   const eliminarPaciente = (id) => {
     const pacientesActualizados = pacientes.filter(paciente => paciente.id !== id);
     
     setPacientes(pacientesActualizados);
   }
-
-  //useEffect - Tem mudança em pacientes? Então executa o código dentro de useEffect
-  useEffect(() => {
-    localStorage.setItem('pacientes', JSON.stringify(pacientes))
-  }, [pacientes])
 
 
 
